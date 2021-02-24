@@ -1,11 +1,11 @@
 import React from 'react'
 
-function PostPage() {
+function UserPage() {
     return (
         <div>
-            Post Page
+            User page
         </div>
     )
 }
 
-export default PostPage
+export default UserPage

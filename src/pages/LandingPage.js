@@ -9,16 +9,16 @@ import "../App.scss"
 
 function LandingPage() {
 //consume state
-const {state} = useContext(context)
+const stateContext = useContext(context)
+const {state, dispatch} = stateContext;
 console.log("state props is", state)
-const postDisplay = state && state.map((item, index) => {
+const postDisplay = state && state.data && state.data.map((item, index) => {
     const postedDate = item && getDayOfMonth(item.data.created)
-    console.log("postedDate",postedDate)
 return(
-    <div class="col s12 m7" key={index}>
-    <div class="card horizontal">
-      <div class="card-stacked">
-        <div class="card-content"> 
+    <div className="col s12 m7" key={index}>
+    <div className="card horizontal">
+      <div className="card-stacked">
+        <div className="card-content"> 
         <div className="author-time-container" style={{display:"flex"}}>
             <p style={{marginRight:"5px"}}>{`Posted by u/${item.data.author}`}</p>
             <p>{typeof postedDate !== 'string' ? `${postedDate} days ago` : postedDate}</p>
@@ -32,11 +32,12 @@ return(
 )
 })
 
+
     return (
         <Fragment>
             <PageTitle />
             <div className="App">
-            <Navbar/ >
+            <Navbar dispatch={dispatch}/>
             <PostsList>
                 {postDisplay}
             </PostsList>
@@ -51,6 +52,13 @@ export const PageTitle = () => {
             <h4 style={{textAlign:"center"}}>/r/ReactJS - The Front Page of React</h4>
         </header>
     )
+}
+const fetchPostType = async (categoryType) => {
+    const proxy  = "https://cors-anywhere.herokuapp.com/"
+    const fullUrl = `${proxy}https://www.reddit.com/r/reactjs/${categoryType}.json`
+const res = await fetch(`${fullUrl}`)
+const data = await res.json();
+console.log("post data", data)
 }
 export default LandingPage
 

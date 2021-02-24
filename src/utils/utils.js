@@ -3,7 +3,6 @@ export const getDayOfMonth = (num) => {
  const isoDateString = new Date(num * 1000)
  //format iso date to "YYYY-MM-DD"
  const dateStringFormat = isoDateString.toISOString().substring(0, 10);
- console.log("dateStringFormat",dateStringFormat)
  //extract day from string
  let day = dateStringFormat.split("-")
  //get posted date from today

@@ -2,9 +2,9 @@ import React from 'react'
 
 function   PostsList({children}) {
     return (
-        <div>
+        <article>
             {children}
-        </div>
+        </article>
     )
 }
 
